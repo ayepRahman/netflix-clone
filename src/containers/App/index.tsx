@@ -7,10 +7,7 @@ import Home from "pages/Home";
 import styled from "styled-components";
 /* DON'T REMOVE THIS LINE - CODE-GENERATOR: PAGES IMPORT */
 
-const AppContainer = styled.div`
-  margin-top: 68px;
-  padding-left: 60px;
-`;
+const AppContainer = styled.div``;
 
 const App: React.FC = () => {
   return (

@@ -1,5 +1,5 @@
-export const TMDB_BASE_URL = process.env.REACT_APP_TMDB_URL;
-export const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+import { TMDB_API_KEY, TMDB_BASE_URL } from "constants/tmdb";
+
 export const API_KEY_PARAM = `api_key=${TMDB_API_KEY}`;
 export const NETFLIX_NETWORK = 213;
 

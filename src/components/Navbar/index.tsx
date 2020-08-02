@@ -20,8 +20,7 @@ const NavbarContainer = styled.div<{ position: { y: number } }>`
   right: 0;
   transition: all 0.5s ease-in-out;
   z-index: 999;
-  background-color: ${(p) =>
-    p.position && p.position.y > 100 ? "#141414" : ""};
+  background-color: ${(p) => (p.position && p.position.y > 100 ? "black" : "")};
 
   display: flex;
   justify-content: space-between;

@@ -4,67 +4,52 @@
 
 import React from "react";
 import useAxios from "axios-hooks";
-import {
-  useHistory,
-  useLocation,
-  useParams,
-  useRouteMatch,
-} from "react-router-dom";
-import styled, { keyframes } from "styled-components";
-import { Container } from "./styled";
+import { Button, Icon } from "@material-ui/core";
+import styled from "styled-components";
 import requests from "utils/requests";
 import OverlayLoader from "components/OverlayLoader";
-
-const HeroContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 120vh;
-  /* background: paleturquoise; */
-`;
-
-const HeroBackdrop = styled.img`
-  height: 120vh;
-  width: 100vw;
-  /* background-image: ${(p) => p.src};
-  background-repeat: no-repeat;
-  background-position: center; */
-`;
+import { SC } from "./styled";
+import { TMDB_BASE_IMG_URL } from "constants/tmdb";
 
 const Hero: React.FC = () => {
-  const [{ data, loading, error }, refetch] = useAxios(
-    requests.fetchNetFlixOriginal
-  );
+  const [{ data, loading }] = useAxios(requests.fetchNetFlixOriginal);
   const RANDOM_SELECT_NUMBER = Math.floor(Math.random() * 21);
 
-  console.log("RANDOM_SELECT_NUMBER", RANDOM_SELECT_NUMBER);
-  console.log(data?.results);
-
-  // backdrop_path: "/qsnXwGS7KBbX4JLqHvICngtR8qg.jpg";
-  // first_air_date: "2015-04-10";
-  // genre_ids: (2)[(28, 80)];
-  // id: 61889;
-  // name: "Marvel's Daredevil";
-  // origin_country: ["US"];
-  // original_language: "en";
-  // original_name: "Marvel's Daredevil";
-  // overview: "Lawyer-by-day Matt Murdock uses his heightened senses from being blinded as a young boy to fight crime at night on the streets of Hell’s Kitchen as Daredevil.";
-  // popularity: 43.218;
-  // poster_path: "/QWbPaDxiB6LW2LjASknzYBvjMj.jpg";
-  // vote_average: 7.9;
-  // vote_count: 1901;
-
   return (
-    <HeroContainer>
+    <SC.HeroContainer>
       {loading && !data?.results?.length ? (
         <OverlayLoader />
       ) : (
-        <HeroBackdrop
-          src={`https://image.tmdb.org/t/p/original${data.results[RANDOM_SELECT_NUMBER].backdrop_path}`}
-        ></HeroBackdrop>
+        <SC.HeroBackdrop
+          src={`${TMDB_BASE_IMG_URL}${data.results?.[RANDOM_SELECT_NUMBER]?.backdrop_path}`}
+        >
+          <SC.HeroContentWrapper>
+            <SC.HeroTitle>
+              {data.results?.[RANDOM_SELECT_NUMBER]?.name}
+            </SC.HeroTitle>
+            <SC.HeroDesc>
+              {data.results?.[RANDOM_SELECT_NUMBER]?.overview}
+            </SC.HeroDesc>
+            <SC.HeroButtonWrapper>
+              <Button
+                size="large"
+                variant="contained"
+                startIcon={<Icon>play_arrow</Icon>}
+              >
+                Play
+              </Button>
+              <Button
+                size="large"
+                variant="contained"
+                startIcon={<Icon>info</Icon>}
+              >
+                More Info
+              </Button>
+            </SC.HeroButtonWrapper>
+          </SC.HeroContentWrapper>
+        </SC.HeroBackdrop>
       )}
-    </HeroContainer>
+    </SC.HeroContainer>
   );
 };
 

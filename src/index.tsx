@@ -2,16 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route } from "react-router-dom";
 import { QueryParamProvider } from "use-query-params";
+import { ThemeProvider } from "styled-components";
 import App from "containers/App";
 import * as serviceWorker from "./serviceWorker";
+import theme from "styles/theme";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <QueryParamProvider ReactRouterRoute={Route}>
-        <App />
-      </QueryParamProvider>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <QueryParamProvider ReactRouterRoute={Route}>
+          <App />
+        </QueryParamProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

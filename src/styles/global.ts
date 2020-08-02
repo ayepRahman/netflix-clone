@@ -9,10 +9,8 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-size: 16px;
-    background-color: lightgrey;
-    /* background-color: #141414; */
-    color: #141414;
-    /* color: white; */
+    background-color: #141414;
+    color: white;
     font-family: 'Open Sans', sans-serif;
     margin: 0;
   }
