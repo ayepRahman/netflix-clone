@@ -1,9 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { QueryParamProvider } from "use-query-params";
-
 import { BrowserRouter, Route } from "react-router-dom";
-import "./index.css";
+import { QueryParamProvider } from "use-query-params";
 import App from "containers/App";
 import * as serviceWorker from "./serviceWorker";
 

@@ -1,11 +1,12 @@
 import React from "react";
+import Navbar from "components/Navbar";
+import Hero from "containers/Hero";
 
 const HomePage: React.FC = () => {
   return (
     <div>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo, quas.
-      Deleniti aperiam autem voluptatibus veniam distinctio animi possimus nisi
-      nemo?
+      <Navbar />
+      <Hero />
     </div>
   );
 };
