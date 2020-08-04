@@ -1,5 +1,7 @@
 /**
  * NetflixRow
+ * @desc - credit to Andrew Tham medium post for netflixCarousel like -
+ * https://medium.com/@andrew.tham.cc/recreating-netflixs-slider-component-2d6ad9009ab0https://medium.com/@andrew.tham.cc/recreating-netflixs-slider-component-2d6ad9009ab0
  */
 
 import React from "react";
@@ -43,8 +45,9 @@ const NetflixSkeleton = styled.div`
 `;
 
 const NetflixRowCardWrapper = styled.div`
-  overflow: scroll;
-  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  overflow-x: scroll;
 `;
 const NetflixRowCardWrapperInner = styled.div`
   /* padding: 60px 0 60px 60px;
@@ -103,6 +106,7 @@ const NetflixCard = styled.div<NetflixStyleProps>`
 
 // 230x130
 
+// NetflixRow
 const NetflixRow: React.FC<NetflixRowProps> = ({ title, fetchUrl }) => {
   const [{ data, loading }] = useAxios(fetchUrl);
 
@@ -115,7 +119,7 @@ const NetflixRow: React.FC<NetflixRowProps> = ({ title, fetchUrl }) => {
       ) : (
         <div>
           <NetflixRowTitle>{title}</NetflixRowTitle>
-          <NetflixRowCardWrapper>
+          {/* <NetflixRowCardWrapper>
             <NetflixRowCardWrapperInner>
               {data.results.map((result: any, index: number) => {
                 console.log(result);
@@ -128,7 +132,7 @@ const NetflixRow: React.FC<NetflixRowProps> = ({ title, fetchUrl }) => {
                 );
               })}
             </NetflixRowCardWrapperInner>
-          </NetflixRowCardWrapper>
+          </NetflixRowCardWrapper> */}
         </div>
       )}
     </NetflixRowWrapper>
