@@ -3,7 +3,7 @@ import React from "react";
 const PADDINGS = 110;
 
 const useSlider = (elementWidth: number, countElements: number) => {
-  const containerRef = React.useRef<HTMLElement>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = React.useState<number>(0);
   const [distance, setDistance] = React.useState<number>(0);
   const [totalInViewport, setTotalInViewport] = React.useState<number>(0);

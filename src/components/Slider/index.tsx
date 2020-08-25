@@ -5,18 +5,72 @@
 
 import React from "react";
 import styled from "styled-components";
-import { SliderProps } from "./interface";
+// import { SliderProps } from "./interface";
 import { SliderContainer } from "./styled";
-import SliderItem from "./SliderItem";
+// import SliderItem from "./SliderItem";
 import useSizeElement from "./useSizeElement";
 import useSlider from "./useSlider";
+import SliderButton from "components/SliderButton";
+import SliderContext from "./context";
 
 export interface SliderProps {
   children: React.ReactChild;
   activeSlide?: number;
 }
+
+const SliderWrapper = styled.div`
+  padding: 40px 0;
+  overflow: hidden;
+  position: relative;
+`;
+
+// .slider {
+//   display: flex;
+//   position: relative;
+
+//   &__container {
+//     display: flex;
+//     padding: 0 55px;
+//     transition: transform 300ms ease 100ms;
+//     z-index: 3;
+//     width: 100%;
+//   }
+
+//   &:not(&--open) .item:hover .show-details-button {
+//     opacity: 1;
+//   }
+
+//   &:not(&--open) .item:hover {
+//     transform: scale(1.5) !important;
+//   }
+
+//   &:not(&--open):hover .item {
+//     transform: translateX(-25%);
+//   }
+
+//   &:not(&--open) .item:hover ~ .item {
+//     transform: translateX(25%);
+//   }
+// }
+
+const SliderContainer = styled.div<{ isOpen?: boolean }>`
+  display: flex;
+  position: relative;
+`;
+
+const SliderRow = styled.div`
+  display: flex;
+  padding: 0 55px;
+  transition: transform 300ms ease 100ms;
+  z-index: 3;
+  width: 100%;
+`;
+
 // TODO: update shape
-const Slider: React.FC<{}> = ({ children, activeSlide }) => {
+const Slider: React.FC<{ activeSlide: boolean }> = ({
+  children,
+  activeSlide,
+}) => {
   const [currentSlide, setCurrentSlide] = React.useState(activeSlide);
   const { width, elementRef } = useSizeElement();
   const {
@@ -46,13 +100,17 @@ const Slider: React.FC<{}> = ({ children, activeSlide }) => {
   return (
     <SliderContext.Provider value={contextValue}>
       <SliderWrapper>
-        <div className={cx("slider", { "slider--open": currentSlide != null })}>
-          <div ref={containerRef} className="slider__container" {...slideProps}>
+        <SliderContainer isOpen={currentSlide != null}>
+          <SliderRow
+            ref={containerRef}
+            className="slider__container"
+            {...slideProps}
+          >
             {children}
-          </div>
-        </div>
-        {hasPrev && <SlideButton onClick={handlePrev} type="prev" />}
-        {hasNext && <SlideButton onClick={handleNext} type="next" />}
+          </SliderRow>
+        </SliderContainer>
+        {hasPrev && <SliderButton onClick={handlePrev} buttonType="prev" />}
+        {hasNext && <SliderButton onClick={handleNext} buttonType="next" />}
       </SliderWrapper>
       {currentSlide && <Content movie={currentSlide} onClose={handleClose} />}
     </SliderContext.Provider>
