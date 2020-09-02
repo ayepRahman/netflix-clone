@@ -1,4 +1,4 @@
-export interface SliderProps {
+export interface MarkProps {
   // message: string;
   // count: number;
   // disabled: boolean;
@@ -28,12 +28,5 @@ export interface SliderProps {
   // /** alternative function type syntax that takes an event (VERY COMMON) */
   // onClick(event: React.MouseEvent<HTMLButtonElement>): void;
   // /** an optional prop (VERY COMMON!) */
-  // optional?: OptionalType;
-}
-
-export interface SliderContextProps {
-  onSelectSlide: (item: string) => void;
-  onCloseSlide: () => void;
-  elementRef: React.RefObject<HTMLElement>;
-  currentSlide: boolean;
+  // optional?: OptionalType; 
 }

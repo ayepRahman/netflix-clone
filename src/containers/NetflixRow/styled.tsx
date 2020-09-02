@@ -2,8 +2,18 @@
  * Styling using styled components
  */
 
-import styled from 'styled-components'
+import styled from "styled-components";
 
-export const Container = styled.div``
+const NetflixRowWrapper = styled.div`
+  color: white;
+`;
 
-Container.displayName = 'Container'
+const NetflixRowTitle = styled.div`
+  font-size: 1.4vw;
+  padding: 0 0 0 60px;
+`;
+
+export const SC = {
+  NetflixRowWrapper,
+  NetflixRowTitle,
+};

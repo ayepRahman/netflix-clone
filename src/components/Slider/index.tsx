@@ -1,28 +1,20 @@
 /**
  * Slider
- * @link - https://github.com/andrzejewsky/netflix-slider/blob/master/src/components/NetflixSlider/context.js`
+ * @link - https://github.com/andrzejewsky/netflix-slider
  */
 
 import React from "react";
 import styled from "styled-components";
 // import { SliderProps } from "./interface";
-import { SliderContainer } from "./styled";
-// import SliderItem from "./SliderItem";
+// import { SliderContainer } from "./styled";
+import SliderItem from "./SliderItem";
 import useSizeElement from "./useSizeElement";
 import useSlider from "./useSlider";
 import SliderButton from "components/SliderButton";
 import SliderContext from "./context";
-
-export interface SliderProps {
-  children: React.ReactChild;
-  activeSlide?: number;
-}
-
-const SliderWrapper = styled.div`
-  padding: 40px 0;
-  overflow: hidden;
-  position: relative;
-`;
+import Content from "components/Content";
+import { MovieDataProps } from "./interfaces";
+import { TMDB_BASE_IMG_URL } from "constants/tmdb";
 
 // .slider {
 //   display: flex;
@@ -43,7 +35,6 @@ const SliderWrapper = styled.div`
 //   &:not(&--open) .item:hover {
 //     transform: scale(1.5) !important;
 //   }
-
 //   &:not(&--open):hover .item {
 //     transform: translateX(-25%);
 //   }
@@ -52,6 +43,17 @@ const SliderWrapper = styled.div`
 //     transform: translateX(25%);
 //   }
 // }
+
+export interface SliderProps {
+  children: React.ReactChild;
+  activeSlide?: number;
+}
+
+const SliderWrapper = styled.div`
+  padding: 40px 0;
+  overflow: hidden;
+  position: relative;
+`;
 
 const SliderContainer = styled.div<{ isOpen?: boolean }>`
   display: flex;
@@ -67,23 +69,22 @@ const SliderRow = styled.div`
 `;
 
 // TODO: update shape
-const Slider: React.FC<{ activeSlide: boolean }> = ({
-  children,
-  activeSlide,
-}) => {
-  const [currentSlide, setCurrentSlide] = React.useState(activeSlide);
+const Slider: React.FC = ({ children }) => {
+  const [currentSlide, setCurrentSlide] = React.useState<MovieDataProps | null>(
+    null
+  );
   const { width, elementRef } = useSizeElement();
   const {
     handlePrev,
     handleNext,
     slideProps,
     containerRef,
-    hasNext,
     hasPrev,
+    hasNext,
   } = useSlider(width, React.Children.count(children));
 
-  const handleSelect = (movie) => {
-    setCurrentSlide(movie);
+  const handleSelect = (item: MovieDataProps) => {
+    setCurrentSlide(item);
   };
 
   const handleClose = () => {
@@ -97,24 +98,33 @@ const Slider: React.FC<{ activeSlide: boolean }> = ({
     currentSlide,
   };
 
+  console.log({
+    hasPrev,
+    hasNext,
+  });
+
   return (
     <SliderContext.Provider value={contextValue}>
       <SliderWrapper>
         <SliderContainer isOpen={currentSlide != null}>
-          <SliderRow
-            ref={containerRef}
-            className="slider__container"
-            {...slideProps}
-          >
+          <SliderRow ref={containerRef} {...slideProps}>
             {children}
           </SliderRow>
         </SliderContainer>
         {hasPrev && <SliderButton onClick={handlePrev} buttonType="prev" />}
         {hasNext && <SliderButton onClick={handleNext} buttonType="next" />}
       </SliderWrapper>
-      {currentSlide && <Content movie={currentSlide} onClose={handleClose} />}
+      {currentSlide && (
+        <Content
+          imgUrl={`${TMDB_BASE_IMG_URL}${currentSlide.poster_path}`}
+          desc={currentSlide.overview}
+          title={currentSlide.name}
+          onClose={handleClose}
+        />
+      )}
     </SliderContext.Provider>
   );
 };
 
 export default Slider;
+export { SliderItem };

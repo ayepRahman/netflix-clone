@@ -17,17 +17,24 @@ export const SliderButtonContainer = styled.button<SliderButtonStyleProps>`
   padding: 0;
   margin: 40px 0;
   z-index: 4;
+  color: white;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   ${(p) =>
     p.buttonType === ButtonEnum.next
       ? css`
-          span {
-            transform: rotateZ(-90deg);
+          svg {
+            transform: rotateZ(180deg);
           }
+          right: 0;
         `
       : css`
-          span {
-            transform: rotateZ(90deg);
+          svg {
+            transform: rotateZ(0deg);
           }
+          right: unset;
         `}
 `;

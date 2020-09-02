@@ -1,48 +1,34 @@
 import React from "react";
-import cx from "classnames";
+import ShowDetailsButton from "components/ShowDetailsButton";
+import Mark from "components/Mark";
 import SliderContext from "./context";
-import ShowDetailsButton from "./ShowDetailsButton";
-import Mark from "./Mark";
-import "./Item.scss";
-import SliderContext from "./context.tsx";
-import { SliderContextProps } from "./interface";
+import { SC } from "./styled";
+import { SliderContextProps, SliderItemProps } from "./interfaces";
+import styled from "styled-components";
+import { TMDB_BASE_IMG_URL } from "constants/tmdb";
 
-const Item = ({ movie }) => {
+const SliderItem: React.FC<SliderItemProps> = ({ item, ...props }) => {
   const context = React.useContext<Partial<SliderContextProps>>(SliderContext);
-  console.log("[Item]: context", context);
+  // console.log("[Item]: context", context);
   const { onSelectSlide, currentSlide, elementRef } = context;
-  const isActive = currentSlide && currentSlide.id === movie.id;
+  const isActive = currentSlide && currentSlide.id === item.id;
+
+  // console.log("SliderItem: currentSlide", currentSlide);
+  // console.log("SliderItem: item", item);
+  console.log("SliderItem: isActive", isActive);
 
   return (
-    <div
+    <SC.ItemContainer
       ref={elementRef}
-      className={cx("item", {
-        "item--open": isActive,
-      })}
+      isActive={isActive}
+      onClick={() => onSelectSlide && onSelectSlide(item)}
+      {...props}
     >
-      <img src={movie.image} alt="" />
-      <ShowDetailsButton onClick={() => onSelectSlide(movie)} />
+      <img src={`${TMDB_BASE_IMG_URL}${item.backdrop_path}`} alt={item.name} />
+      <ShowDetailsButton />
       {isActive && <Mark />}
-    </div>
+    </SC.ItemContainer>
   );
 };
-<SliderContext.Consumer>
-  {({ onSelectSlide, currentSlide, elementRef }) => {
-    const isActive = currentSlide && currentSlide.id === movie.id;
 
-    return (
-      <div
-        ref={elementRef}
-        className={cx("item", {
-          "item--open": isActive,
-        })}
-      >
-        <img src={movie.image} alt="" />
-        <ShowDetailsButton onClick={() => onSelectSlide(movie)} />
-        {isActive && <Mark />}
-      </div>
-    );
-  }}
-</SliderContext.Consumer>;
-
-export default Item;
+export default SliderItem;

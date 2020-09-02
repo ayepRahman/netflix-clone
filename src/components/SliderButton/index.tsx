@@ -10,7 +10,7 @@ import { SliderButtonContainer } from "./styled";
 // TODO: write test case
 const SliderButton: React.FC<SliderButtonProps> = ({ onClick, buttonType }) => {
   return (
-    <SliderButtonContainer buttonType={buttonType}>
+    <SliderButtonContainer onClick={onClick} buttonType={buttonType}>
       <span>
         <ArrowBackIosIcon />
       </span>

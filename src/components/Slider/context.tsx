@@ -1,5 +1,5 @@
 import React from "react";
-import { SliderContextProps } from "./interface";
+import { SliderContextProps } from "./interfaces";
 
 const SliderContext = React.createContext<Partial<SliderContextProps>>({});
 
