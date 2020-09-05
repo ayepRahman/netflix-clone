@@ -45,8 +45,6 @@ const ShowDetailsButton: React.FC<ShowDetailsButtonProps> = ({
   onClick,
   isActive,
 }) => {
-  console.log("ShowDetailsButton isActive", isActive);
-
   return (
     <ShowDetailsButtonContainer onClick={onClick} isActive={isActive}>
       <span>

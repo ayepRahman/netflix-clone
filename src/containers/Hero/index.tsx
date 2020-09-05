@@ -5,7 +5,6 @@
 import React from "react";
 import useAxios from "axios-hooks";
 import { Button, Icon } from "@material-ui/core";
-import styled from "styled-components";
 import requests from "utils/requests";
 import OverlayLoader from "components/OverlayLoader";
 import { SC } from "./styled";

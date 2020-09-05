@@ -17,11 +17,7 @@ const HeroBackdrop = styled.div<{ src: string }>`
   height: 120vh;
   background-color: white;
   background-color: ${(p) => p.theme.colors.justblack};
-  background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 1)
-    ),
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #141414),
     url(${(p) => p.src});
   background-repeat: no-repeat;
   background-size: cover;

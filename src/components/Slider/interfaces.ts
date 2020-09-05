@@ -4,6 +4,7 @@ export interface MovieDataProps {
   genre_ids: string[]; // (2) [18, 9648]
   id: number | string; // 105214
   name: string; // "Dark Desire"
+  title: string; //
   origin_country: string[]; // ["MX"]
   original_language: string; // "es"
   original_name: string; // "Oscuro deseo"

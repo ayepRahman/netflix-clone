@@ -15,6 +15,16 @@ const HomePage: React.FC = () => {
           title="Netflix Original"
           fetchUrl={requests.fetchNetFlixOriginal}
         />
+        <NetflixRow title="Trending" fetchUrl={requests.fetchTrending} />
+        <NetflixRow title="Top Rated" fetchUrl={requests.fetchTopRated} />
+        <NetflixRow title="Animation" fetchUrl={requests.fetchAnime} />
+        <NetflixRow title="Action Movies" fetchUrl={requests.fetchAction} />
+        <NetflixRow title="Comedy Movies" fetchUrl={requests.fetchComedy} />
+        <NetflixRow title="Horror Movies" fetchUrl={requests.fetchHorror} />
+        <NetflixRow
+          title="Documentaries"
+          fetchUrl={requests.fetchDocumentaries}
+        />
       </SC.HomePageBody>
     </div>
   );

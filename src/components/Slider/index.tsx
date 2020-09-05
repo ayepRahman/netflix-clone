@@ -15,6 +15,7 @@ import SliderContext from "./context";
 import Content from "components/Content";
 import { MovieDataProps } from "./interfaces";
 import { TMDB_BASE_IMG_URL } from "constants/tmdb";
+import { SC } from "./styled";
 
 // .slider {
 //   display: flex;
@@ -49,25 +50,6 @@ export interface SliderProps {
   activeSlide?: number;
 }
 
-const SliderWrapper = styled.div`
-  padding: 40px 0;
-  overflow: hidden;
-  position: relative;
-`;
-
-const SliderContainer = styled.div<{ isOpen?: boolean }>`
-  display: flex;
-  position: relative;
-`;
-
-const SliderRow = styled.div`
-  display: flex;
-  padding: 0 55px;
-  transition: transform 300ms ease 100ms;
-  z-index: 3;
-  width: 100%;
-`;
-
 // TODO: update shape
 const Slider: React.FC = ({ children }) => {
   const [currentSlide, setCurrentSlide] = React.useState<MovieDataProps | null>(
@@ -98,27 +80,22 @@ const Slider: React.FC = ({ children }) => {
     currentSlide,
   };
 
-  console.log({
-    hasPrev,
-    hasNext,
-  });
-
   return (
     <SliderContext.Provider value={contextValue}>
-      <SliderWrapper>
-        <SliderContainer isOpen={currentSlide != null}>
-          <SliderRow ref={containerRef} {...slideProps}>
+      <SC.SliderWrapper>
+        <SC.SliderContainer isOpen={currentSlide != null}>
+          <SC.SliderRow ref={containerRef} {...slideProps}>
             {children}
-          </SliderRow>
-        </SliderContainer>
+          </SC.SliderRow>
+        </SC.SliderContainer>
         {hasPrev && <SliderButton onClick={handlePrev} buttonType="prev" />}
         {hasNext && <SliderButton onClick={handleNext} buttonType="next" />}
-      </SliderWrapper>
+      </SC.SliderWrapper>
       {currentSlide && (
         <Content
-          imgUrl={`${TMDB_BASE_IMG_URL}${currentSlide.poster_path}`}
+          imgUrl={`${TMDB_BASE_IMG_URL}${currentSlide.backdrop_path}`}
           desc={currentSlide.overview}
-          title={currentSlide.name}
+          title={currentSlide.name || currentSlide.title}
           onClose={handleClose}
         />
       )}

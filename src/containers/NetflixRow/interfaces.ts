@@ -8,8 +8,4 @@
 export interface NetflixRowProps {
   title: string;
   fetchUrl: string;
-  /**
-   * @desc a boolean that make Netflix Card Height Taller
-   */
-  isNetflixOriginal?: boolean;
 }
