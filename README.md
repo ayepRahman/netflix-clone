@@ -2,6 +2,8 @@
 
 ![alt text](src/resources/img/demo.png)
 
+[demo](https://netflix-clone-bdd1a.firebaseapp.com/)
+
 ## Features
 
 - React (Typescript)
